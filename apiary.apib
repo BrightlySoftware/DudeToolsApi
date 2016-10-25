@@ -87,7 +87,7 @@ Check account products endpoints.
 This collection allows new account product associations to be created and for products of existing associations to be returned.
 
 + Parameters
-    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
     + page: 1 (number, optional) - {INT} The page to request from the collection.
     + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
     + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
@@ -104,7 +104,7 @@ This collection allows new account product associations to be created and for pr
 This collection allows new account product associations to be created.
 
 + Parameters
-    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
 
 ### POST
 
@@ -118,8 +118,8 @@ This collection allows new account product associations to be created.
 This endpoint allows existing account product associations to be found and returned or removed.
 
 + Parameters
-    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
-    + id: 12345 (required, number) - {INT} ID of the product in the form of an integer
+    + accountId: 1234567890 (number, required) - {INT} ID of the account in the form of an integer
+    + id: 12345 (number, required) - {INT} ID of the product in the form of an integer
     + includeAudit: true (boolean, optional) - Flag to return audit information from the api
 
 ### GET
