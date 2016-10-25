@@ -192,15 +192,20 @@ Represents a paged response when bulk retrieving from a collection
 + `dataSize`: 1000 (number, required) - {INT} The total records returned in the response.
 + `total`: 2000 (number, required) - {INT} The total number of records available in the collection.
 
-## Audit (object)
+## Base Audit (object)
 Represents the audit fields
 
 ### Properties
 + `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was created.
 + `createdByUserId`: 1 (number, optional) - {INT} Information about the user who created the record.
-+ `createdByApiClientId`: 1 (number, optional) - {INT} Information about the client who created the record.
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUserId`: 1 (number, optional) - {INT} Information about the user who last modified the record.
+
+## Audit (Base Audit)
+Represents the audit fields
+
+### Properties
++ `createdByApiClientId`: 1 (number, optional) - {INT} Information about the client who created the record.
 + `updatedByApiClientId`: 1 (number, optional) - {INT} Information about the client who last modified the record.
 
 ## Base Client (object)
@@ -248,6 +253,27 @@ Represents the individual privileges that allow specific access to the platform
 ### Properties
 + `id`: 1 (number, required) - {INT} The unique ID.
 + `name`: WorkOrderCreate (string, required) - The key for the permission
+
+## Location (object)
+Represents a geo-location point.
+
+### Properties
++ `latitude`: 35.529051 (number, optional) - The latitude for the location.
++ `longitude`: 77.401076 (number, optional) - The longitude of the location.
++ `streetAddress`: PO BOX 1489 (string, optional) - The street address for the location.
++ `streetAddressLine2` (string, optional) - The second, optional line for street address for the location.
++ `city`: WINTERVILLE (string, required) - The city for the location.
++ `region`: NC (string, required) - The region for the location.
++ `postalCode`: 28590-1489 (string, required) - The postal code for the location.
++ `country`: USA (string, required) - The country for the location.
+
+## Market (Base Audit)
+Represents a market.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID for the market.
++ `name`: MFG (string, required) - The name of the market.
++ `marketDescription`: Manufacturing (string, required) - The description for the market.
 
 ## Product (object)
 Represents a product.
