@@ -74,7 +74,8 @@ Any response that does not provide a ```200 OK``` response code should be treate
 ### GET
 
 + Response 200 (application/json)
-    + Headers
++ Headers
+
         X-Dude-Api-Limit: Unlimited or Number
         X-Dude-Api-Remaining: Unlimited or Number
         X-Dude-Api-Server: Api Server ID
@@ -214,6 +215,14 @@ Represents a user's role within a given application
 ### Properties
 + `id`: 1 (number, required) - {INT} The unique ID.
 + `roleName`: Administrator (string, required) - The description for the role
+
+## System Of Record Account (object)
+Represents a system of record account.
+
+### Properties
++ `accountNumber`: 1 (number, required) - {INT} The account number for the system of record.
++ `sourceAbbreviation`: SD  (string, required) - The source abbreviation for the system of record (like SD for School Dude or FD for Facility Dude).
++ `accountGarden`: sdgarden (string, required) - The account garden from the system of record.
 
 ## Account (Audit)
 Represents a Dude Platform account
