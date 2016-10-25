@@ -81,6 +81,76 @@ Any response that does not provide a ```200 OK``` response code should be treate
             X-Dude-Api-Server: Api Server ID
     + Attributes (Heartbeat)
 
+# Group Account Products
+Check account products endpoints.
+
+## Account Product Collection [/accounts/{accountId}/products{?page,pagesize,orderby,q,includeAudit}]
+This collection allows new account product associations to be created and for products of existing associations to be returned.
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + page: 1 (number, optional) - {INT} The page to request from the collection.
+    + pagesize: 1000 (number, optional) - {INT} The number of records to load in a page from the collection.
+    + orderby: Quantity asc (string, optional) - A string describing the ordering to perform on the collection.
+    + q: Sample (string, optional) - Queries product name containing this value
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Base Collection Response)
+        + data (required, array[Account Product]) - The Account Product response collection.
+
+## Account Product Create [/accounts/{accountId}/products]
+This collection allows new account product associations to be created.
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+
+### POST
+
++ Request (application/json)
+    + Attributes (Base Account Product)
+
++ Response 201 (application/json)
+    + Attributes (Account Product)
+
+## Account Product Detail [/accounts/{accountId}/products/{id}{?includeAudit}]
+This endpoint allows existing account product associations to be found and returned or removed.
+
++ Parameters
+    + accountId: 1234567890 (required, number) - {INT} ID of the account in the form of an integer
+    + id: 12345 (required, number) - {INT} ID of the product in the form of an integer
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### GET
+
++ Response 200 (application/json)
+    + Attributes (Account Product)
+
+### PUT
+
++ Request (application/json)
+    + Attributes (Account Product)
+
++ Response 201 (application/json)
+    + Attributes (Account Product)
+
+# Account Users Create [/accounts/{accountId}/users{?includeAudit}]
+Create a Dude Platform user for the account.
+
++ Parameters
+    + accountId: 1234567890 (number, required) - {INT} The Dude Platform account the user belongs too.
+    + includeAudit: true (boolean, optional) - Flag to return audit information from the api
+
+### POST
+
++ Request (application/json)
+    + Attributes (User Detail)
+
++ Response 201 (application/json)
+    + Attributes (User Activation)
+
 # Data Structures
 
 ## System Information (object)
@@ -129,3 +199,91 @@ Represents the audit fields
 + `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The date and time in ISO-8601 format the record was last updated.
 + `updatedByUserId`: 1 (number, optional) - {INT} Information about the user who last modified the record.
 + `updatedByApiClientId`: 1 (number, optional) - {INT} Information about the client who last modified the record.
+
+## Base Client (object)
+Represents the API Client object with base properties.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID that represents the API client.
+
+## Security Role (object)
+Represents a user's role within a given application
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID.
++ `roleName`: Administrator (string, required) - The description for the role
+
+## Permission (object)
+Represents the individual privileges that allow specific access to the platform
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID.
++ `name`: WorkOrderCreate (string, required) - The key for the permission
+
+## Product (object)
+Represents a product.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID for the product.
++ `name`: Maintenance MVP (string, required) - The name of the product.
++ `url`: https://mvp.facilitydude.com (string, required) - The url for the product.
+
+## Base Account Product (object)
+Represents a product account association with base properties.
+
+### Properties
++ `account` (Account, required) - The account.
++ `asset` (Product, required) - The product.
++ `contact` (Base User, optional) - The main contact for the product.
++ `startDateTime` (string, optional) - {DATETIME} The UTC start date and time.
++ `endDateTime` (string, optional) - {DATETIME} The UTC end date and time.
+
+## Account Product (Base Account Product)
+Represents a product account association
+
+### Properties
++ `createdByUser` (Base User, optional) - The user who created the object.
++ `createdDateTime` (string, optional) - {DATETIME} The UTC date and time the object was created.
++ `createdByApiClient` (Base Client, required) - The API Client who created the object.
++ `updatedByUser` (Base User, optional) - The user who last updated the object.
++ `updatedDateTime` (string, optional) - {DATETIME} The UTC date and time the object was last updated.
++ `updatedByApiClient` (Base Client, required) - The API Client that last updated the object.
+
+## Base User (object)
+Represents a user with base properties.
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID that represents the user.
++ `firstName`: John (string, required) - The first name of the user.
++ `lastName`: Smith (string, required) - The last name of the user.
++ `email`: john.smith@dudesolutions.io (string, required) - The email of the user.
+
+## User (Base User)
+Represents a user with properties included.
+
+### Properties
++ `hourlyRate`: 25.50 (number, optional) - The hourly Rate
++ `roles` (array[Security Role], required) - The collection of roles associated with the user.  When authenticating against an application, only the roles for the user in the context of that application will be returned.
++ `isActivated`: true (boolean, required) - Indicates if a user has been activated within the platform
++ `isEnabled`: true (boolean, required) - Indicates if the user is able to login to the platform
+
+## User Detail (User)
+Represents a user with all properties included.
+
+### Properties
++ `account` (Account, required) - The account that the user is associated with
++ `permissions` (array[Permission], required) - The list of permissions available to the user based on the current role set.
++ `createdByUser` (Base User, optional) - The user who created the object.
++ `createdDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The UTC date and time the object was created.
++ `createdByApiClient` (Base Client, required) - The API Client who created the object.
++ `updatedByUser` (Base User, optional) - The user who last updated the object.
++ `updatedDateTime`: `2015-01-01T00:00:00.123Z` (string, optional) - {DATETIME} The UTC date and time the object was last updated.
++ `updatedByApiClient` (Base Client, required) - The API Client that last updated the object.
+
+## User Activation (User Detail)
+Represents a user with all properties (including activation info).
+
+### Properties
++ `activationToken`: 721wus922isoa281WDH1 (string, required) - The token that is needed to activate the user
++ `activationExpires`: `2015-01-01T00:00:00.123Z` (string, required) - The time at which the activation token will expire
++ `activationCompleted`: `2015-01-01T00:00:00.123Z` (string, required) - The date the activtion process was completed
