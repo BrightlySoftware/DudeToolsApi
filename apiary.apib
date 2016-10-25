@@ -215,6 +215,24 @@ Represents a user's role within a given application
 + `id`: 1 (number, required) - {INT} The unique ID.
 + `roleName`: Administrator (string, required) - The description for the role
 
+## Account (Audit)
+Represents a Dude Platform account
+
+### Properties
++ `id`: 1 (number, required) - {INT} The unique ID for the account.
++ `name`: Adams Elementary (string, required) - The name of the account.
++ `number`: 10000009 (number, required) - {INT} The number for the account.
++ `contactFirstName`: June (string, optional) - The first name of the contact person.
++ `contactMiddleName`: K. (string, optional) - The middle name of the contact person.
++ `contactLastName`: Aamodt (string, optional) - The last name of the contact person.
++ `contactPhoneNumber`: 9194603431 (string, optional) - The phone number for the contact person.
++ `contactEmailAddress`: jaamodt@dudesolutions.io (string, optional) - The email address for the contact person.
++ `location` (Location, required) - The location for the account.
++ `market` (Market, required) - The market for the account.
++ `timeZone`: America/New_York (string, required) - The time zone for the account.
++ `systemOfRecordAccount` (System Of Record Account, optional) - The system of record account.
++ `assets` (Product, required) - The collection of assets the account owns.
+
 ## Permission (object)
 Represents the individual privileges that allow specific access to the platform
 
